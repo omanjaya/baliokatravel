@@ -1,1 +1,1 @@
-web: php artisan migrate --force && php artisan octane:start --server=swoole --host=0.0.0.0 --port=${PORT:-8080}
+web: php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
