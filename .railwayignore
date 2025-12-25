@@ -1,0 +1,35 @@
+# Dependencies (will be installed during build)
+node_modules/
+vendor/
+
+# Development files
+.git/
+.github/
+.vscode/
+.cursor/
+.claude/
+.agent/
+.superdesign/
+tests/
+docs/
+
+# Local environment
+.env
+.env.local
+.env.*.local
+*.log
+
+# Build artifacts that will be regenerated
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+bootstrap/cache/*
+
+# Local binaries
+frankenphp
+
+# IDE
+*.swp
+*.swo
+.idea/

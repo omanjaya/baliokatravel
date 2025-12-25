@@ -1,0 +1,41 @@
+# Dependencies (Vercel will install)
+node_modules
+vendor
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Development
+.env
+.env.local
+.env.*.local
+tests
+.cursor
+.claude
+.agent
+.superdesign
+docs
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Local binaries
+frankenphp
+
+# Logs
+*.log
+storage/logs/*
+
+# Cache (will be regenerated)
+bootstrap/cache/*
+
+# Railway config (not needed for Vercel)
+railway.json
+nixpacks.toml
+Procfile
+.railwayignore

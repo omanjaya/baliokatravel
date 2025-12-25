@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "buildCommand": "",
+  "installCommand": "",
+  "framework": null,
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "https://baliokatravel-app-production.up.railway.app/$1"
+    }
+  ]
+}

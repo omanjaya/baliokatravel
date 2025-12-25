@@ -1,0 +1,97 @@
+BALI OKAY TRAVEL - ANIMATION DESIGN
+===================================
+
+# CORE PAGE ANIMATIONS
+pageLoad: 800ms ease-out [Y+40→0, α0→1] stagger+100ms
+heroLoad: 1000ms ease-out [Y+60→0, α0→1, S0.9→1]
+contentLoad: 600ms ease-out [Y+30→0, α0→1] stagger+50ms
+
+# NAVIGATION ANIMATIONS
+navShow: 300ms ease-out [Y-100→0, α0→1]
+navScroll: 400ms ease-out [transparent→solid, shadow0→lg]
+mobileMenu: 350ms ease-out [X-100→0, α0→1]
+navItemHover: 200ms [Y0→-2, α0.8→1]
+
+# HERO SECTION ANIMATIONS
+heroTitle: 1000ms ease-out [Y+50→0, α0→1]
+heroSubtitle: 1000ms ease-out [Y+40→0, α0→1, delay+200ms]
+searchWidget: 800ms ease-out [Y+30→0, α0→1, S0.9→1, delay+400ms]
+searchTab: 200ms [bg→accent, S1→1.02]
+floatingElements: 3000ms ∞ [Y±15, X±5, R±3°] stagger+500ms
+
+# SEARCH WIDGET ANIMATIONS
+searchFocus: 200ms [S1→1.02, shadow+ring]
+searchBlur: 150ms [S1.02→1, shadow-ring]
+datePickerOpen: 300ms [Y0→-10, α0→1, S0.9→1]
+guestSelectorOpen: 300ms [Y0→-10, α0→1, S0.9→1]
+searchButton: 200ms [S1→0.95→1, shadow+glow]
+
+# ACTIVITY CARD ANIMATIONS
+cardLoad: 600ms ease-out [Y+30→0, α0→1] stagger+100ms
+cardHover: 300ms [Y0→-8, S1→1.02, shadow+lg]
+cardImageHover: 500ms [S1→1.05]
+heartIcon: 200ms [S1→1.2→1, fill→coral]
+priceBadge: 200ms [Y0→-4, shadow+md]
+ratingStars: 400ms [S0→1, α0→1] stagger+50ms
+bookButton: 200ms [S1→0.95→1, bg→ocean-blue]
+
+# CATEGORY CARD ANIMATIONS
+categoryLoad: 500ms ease-out [Y+20→0, α0→1] stagger+80ms
+categoryHover: 300ms [Y0→-6, S1→1.05, shadow+md]
+categoryIcon: 200ms [R0→10°→0]
+categoryRipple: 400ms [S0→2, α1→0]
+
+# TRUST BADGE ANIMATIONS
+badgeLoad: 600ms ease-out [Y+25→0, α0→1, S0.8→1] stagger+120ms
+badgeHover: 200ms [Y0→-4, S1→1.1]
+badgeIcon: 300ms [R0→360°] infinite
+badgeCounter: 1000ms [0→final] countUp
+
+# CTA SECTION ANIMATIONS
+ctaLoad: 700ms ease-out [Y+30→0, α0→1, S0.9→1]
+ctaButtonHover: 200ms [S1→1.05, shadow+xl]
+ctaButtonPress: 150ms [S1→0.95→1]
+ctaGlow: 2000ms ∞ [α0.3→0.7→0.3]
+
+# FOOTER ANIMATIONS
+footerLoad: 600ms ease-out [Y+20→0, α0→1]
+linkHover: 200ms [X0→4, color→accent]
+socialIcon: 200ms [R0→15°→0, S1→1.2→1]
+
+# MICRO-INTERACTIONS
+buttonPress: 150ms [S1→0.95→1]
+buttonHover: 200ms [S1→1.05, shadow+md]
+linkHover: 200ms [color→accent, underline]
+inputFocus: 200ms [border→accent, shadow+ring]
+selectOpen: 300ms [Y0→-5, α0→1]
+tabSwitch: 200ms [bg→accent, color→white]
+
+# LOADING STATES
+skeleton: 1500ms ∞ [bg: sand↔sand-light]
+imageLoad: 400ms [α0→1, blur10→0]
+contentLoad: 600ms [Y+20→0, α0→1]
+spinner: 1000ms ∞ linear [R360°]
+pulse: 1500ms ∞ [α0.6→1→0.6]
+
+# SCROLL ANIMATIONS
+scrollReveal: 600ms ease-out [Y+50→0, α0→1] when in viewport
+parallax: [Y0.5→1] based on scroll position
+scrollIndicator: 2000ms ∞ [Y±5, α0.4→1]
+
+# ERROR & SUCCESS STATES
+errorShake: 400ms [X±5] shake
+successBounce: 600ms [S0→1.2→1, R360°]
+notificationSlide: 300ms [Y-100→0, α0→1]
+notificationHide: 200ms [Y0→-100, α1→0]
+
+# MOBILE-SPECIFIC ANIMATIONS
+mobileMenuSlide: 350ms ease-out [X-100→0, α0→1]
+mobileTabSwitch: 200ms [X0→100→0]
+mobileCardPress: 150ms [S1→0.98→1]
+mobileSwipe: [X±50] based on swipe gesture
+
+# PERFORMANCE OPTIMIZATIONS
+willChange: transform, opacity for animated elements
+transform3d: use translate3d for hardware acceleration
+reducedMotion: respect prefers-reduced-motion media query
+lazyLoad: animate images only when in viewport

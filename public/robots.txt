@@ -1,0 +1,30 @@
+# robots.txt for BaliOkayTravel
+
+User-agent: *
+Allow: /
+
+# Disallow admin areas
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /supplier
+Disallow: /supplier/*
+
+# Disallow user account pages
+Disallow: /dashboard
+Disallow: /profile
+
+# Disallow booking flow pages (they require auth)
+Disallow: /book/
+Disallow: /payment/
+
+# Disallow utility routes
+Disallow: /api/
+Disallow: /webhooks/
+
+# Allow search and activities
+Allow: /search
+Allow: /activities/
+Allow: /areas/
+
+# Sitemap location
+Sitemap: https://baliokatravel.com/sitemap.xml

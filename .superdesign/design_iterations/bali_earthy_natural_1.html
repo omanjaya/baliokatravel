@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaliOkayTravel - Earthy Natural</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./bali_tropical_luxury_theme.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Figtree', sans-serif !important;
+            background-color: var(--background) !important;
+            color: var(--foreground) !important;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 700 !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--muted);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--jungle-green);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--jungle-green-light);
+        }
+
+        /* Natural Card Styles */
+        .natural-card {
+            background: white;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .natural-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .natural-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--jungle-green), var(--sunset-gold), var(--ocean-blue));
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        /* Natural Backgrounds */
+        .bg-natural {
+            background: linear-gradient(135deg, #f8faf9 0%, #e6f7ed 100%);
+        }
+
+        .bg-sand {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .bg-leaf {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        }
+
+        .bg-ocean {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes sway {
+            0%, 100% {
+                transform: rotate(-3deg);
+            }
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        @keyframes grow {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        .animate-sway {
+            animation: sway 4s ease-in-out infinite;
+        }
+
+        .animate-grow {
+            animation: grow 3s ease-in-out infinite;
+        }
+
+        /* Stagger animations */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        .stagger-7 { animation-delay: 0.7s; }
+        .stagger-8 { animation-delay: 0.8s; }
+
+        /* Button Styles */
+        .btn-primary {
+            background: var(--jungle-green);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .btn-primary:hover::after {
+            transform: translateX(100%);
+        }
+
+        .btn-primary:hover {
+            background: var(--jungle-green-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--sunset-gold);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-lg);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-secondary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .btn-secondary:hover::after {
+            transform: translateX(100%);
+        }
+
+        .btn-secondary:hover {
+            background: var(--sunset-gold-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Input Styles */
+        .natural-input {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .natural-input:focus {
+            outline: none;
+            border-color: var(--jungle-green);
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        /* Hero Section */
+        .natural-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .natural-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(5, 150, 105, 0.3) 0%, rgba(245, 158, 11, 0.3) 50%, rgba(12, 74, 110, 0.3) 100%);
+            z-index: 1;
+        }
+
+        /* Category Badge */
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-jungle {
+            background: var(--jungle-green);
+            color: white;
+        }
+
+        .badge-sunset {
+            background: var(--sunset-gold);
+            color: white;
+        }
+
+        .badge-ocean {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .badge-coral {
+            background: var(--coral);
+            color: white;
+        }
+
+        /* Price Tag */
+        .price-tag {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            z-index: 2;
+        }
+
+        /* Rating Stars */
+        .rating-stars {
+            color: var(--sunset-gold);
+        }
+
+        /* Feature Card */
+        .feature-card {
+            background: white;
+            border-radius: var(--radius-2xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--jungle-green), var(--sunset-gold), var(--ocean-blue));
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        /* Feature Icon */
+        .feature-icon {
+            width: 5rem;
+            height: 5rem;
+            border-radius: var(--radius-2xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .icon-jungle {
+            background: var(--jungle-green);
+            color: white;
+        }
+
+        .icon-sunset {
+            background: var(--sunset-gold);
+            color: white;
+        }
+
+        .icon-ocean {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .icon-coral {
+            background: var(--coral);
+            color: white;
+        }
+
+        /* Testimonial Card */
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius-2xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--jungle-green), var(--sunset-gold), var(--ocean-blue));
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        /* Sticky Header */
+        .header-scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Natural Elements */
+        .leaf-decoration {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-radius: 0 100% 100% 0;
+            transform: rotate(45deg);
+            opacity: 0.8;
+        }
+
+        .wave-decoration {
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            background: linear-gradient(90deg, #e0f2fe 0%, #bae6fd 100%);
+            border-radius: 50% 50% 0 0;
+            opacity: 0.8;
+        }
+
+        /* Image Overlay */
+        .image-overlay {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-overlay:hover::after {
+            opacity: 1;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--radius-2xl);
+            padding: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab-nav button {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-lg);
+            background: transparent;
+            color: var(--foreground);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-nav button.active {
+            background: var(--jungle-green);
+            color: white;
+        }
+
+        /* Stats Counter */
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--jungle-green), var(--sunset-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 animate-fade-in">
+                    <div class="w-10 h-10 rounded-full bg-jungle-green flex items-center justify-center">
+                        <i data-lucide="waves" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-foreground">BaliOkayTravel</span>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8 animate-fade-in stagger-1">
+                    <a href="#" class="text-foreground hover:text-jungle-green transition-all duration-300 font-medium">Activities</a>
+                    <a href="#" class="text-foreground hover:text-jungle-green transition-all duration-300 font-medium">Areas</a>
+                    <a href="#" class="text-foreground hover:text-jungle-green transition-all duration-300 font-medium">About</a>
+                    <a href="#" class="text-foreground hover:text-jungle-green transition-all duration-300 font-medium">Contact</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex items-center space-x-4 animate-fade-in stagger-2">
+                    <button class="hidden sm:block px-6 py-2 rounded-full text-foreground font-medium">
+                        Sign In
+                    </button>
+                    <button class="btn-primary">
+                        Book Now
+                    </button>
+                    <!-- Mobile Menu -->
+                    <button id="mobile-menu-btn" class="md:hidden text-foreground">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="natural-hero">
+        <!-- Natural Elements -->
+        <div class="leaf-decoration" style="top: 10%; left: 5%;"></div>
+        <div class="leaf-decoration" style="top: 20%; right: 10%; transform: rotate(135deg);"></div>
+        <div class="wave-decoration" style="bottom: 15%; left: 15%;"></div>
+        <div class="wave-decoration" style="bottom: 25%; right: 20%;"></div>
+
+        <div class="text-center text-white relative z-10 animate-fade-in-up">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
+                Discover Bali's Natural Beauty
+            </h1>
+            <p class="text-xl sm:text-2xl mb-8 max-w-3xl mx-auto">
+                Experience authentic adventures in breathtaking landscapes
+            </p>
+            
+            <!-- Search Widget -->
+            <div class="max-w-4xl mx-auto">
+                <!-- Tab Navigation -->
+                <div class="tab-nav">
+                    <button class="active">Experiences</button>
+                    <button>Destinations</button>
+                    <button>Packages</button>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl p-8 shadow-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <!-- Location -->
+                        <div>
+                            <label class="block text-white text-sm font-medium mb-2 text-left">Location</label>
+                            <div class="relative">
+                                <i data-lucide="map-pin" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white opacity-70"></i>
+                                <select class="w-full bg-white bg-opacity-20 backdrop-filter backdrop-blur-md border-0 rounded-2xl pl-12 pr-4 py-4 text-white appearance-none cursor-pointer focus:ring-2 focus:ring-white focus:ring-opacity-30 transition-all">
+                                    <option>All Areas</option>
+                                    <option>Ubud</option>
+                                    <option>Seminyak</option>
+                                    <option>Canggu</option>
+                                    <option>Nusa Dua</option>
+                                    <option>Uluwatu</option>
+                                    <option>Nusa Penida</option>
+                                </select>
+                                <i data-lucide="chevron-down" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white opacity-70 pointer-events-none"></i>
+                            </div>
+                        </div>
+
+                        <!-- Date -->
+                        <div>
+                            <label class="block text-white text-sm font-medium mb-2 text-left">Date</label>
+                            <div class="relative">
+                                <i data-lucide="calendar" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white opacity-70"></i>
+                                <input type="date" class="w-full bg-white bg-opacity-20 backdrop-filter backdrop-blur-md border-0 rounded-2xl pl-12 pr-4 py-4 text-white focus:ring-2 focus:ring-white focus:ring-opacity-30 transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Guests -->
+                        <div>
+                            <label class="block text-white text-sm font-medium mb-2 text-left">Guests</label>
+                            <div class="relative">
+                                <i data-lucide="users" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white opacity-70"></i>
+                                <select class="w-full bg-white bg-opacity-20 backdrop-filter backdrop-blur-md border-0 rounded-2xl pl-12 pr-4 py-4 text-white appearance-none cursor-pointer focus:ring-2 focus:ring-white focus:ring-opacity-30 transition-all">
+                                    <option>2 Adults</option>
+                                    <option>1 Adult</option>
+                                    <option>2 Adults, 1 Child</option>
+                                    <option>2 Adults, 2 Children</option>
+                                    <option>4 Adults</option>
+                                </select>
+                                <i data-lucide="chevron-down" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white opacity-70 pointer-events-none"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button class="w-full btn-secondary py-4 rounded-2xl text-white font-semibold text-lg flex items-center justify-center space-x-3">
+                        <i data-lucide="search" class="w-6 h-6"></i>
+                        <span>Search Activities</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-leaf">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Stat 1 -->
+                <div class="text-center animate-scale-in stagger-1">
+                    <div class="stats-counter mb-2">50K+</div>
+                    <p class="text-xl font-semibold">Happy Travelers</p>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="text-center animate-scale-in stagger-2">
+                    <div class="stats-counter mb-2">13</div>
+                    <p class="text-xl font-semibold">Stunning Areas</p>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="text-center animate-scale-in stagger-3">
+                    <div class="stats-counter mb-2">8</div>
+                    <p class="text-xl font-semibold">Activity Categories</p>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="text-center animate-scale-in stagger-4">
+                    <div class="stats-counter mb-2">4.9</div>
+                    <p class="text-xl font-semibold">Average Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Activities -->
+    <section class="py-16 bg-natural">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl sm:text-5xl font-bold text-foreground mb-4 animate-fade-in-up">
+                    Featured Experiences
+                </h2>
+                <p class="text-xl text-foreground opacity-80 max-w-2xl mx-auto animate-fade-in-up stagger-1">
+                    Handpicked activities that showcase the best of Bali
+                </p>
+            </div>
+
+            <!-- Activity Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1: Surfing -->
+                <div class="natural-card animate-fade-in-up stagger-2">
+                    <div class="image-overlay h-64">
+                        <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Surfing Lesson" class="w-full h-full object-cover">
+                        <!-- Price Tag -->
+                        <div class="price-tag">
+                            <p class="font-bold text-foreground">$45 USD</p>
+                            <p class="text-sm text-foreground opacity-70">Rp 675,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="category-badge badge-ocean">Water Sports</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 rating-stars fill-current"></i>
+                                <span class="text-foreground font-semibold">4.8</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Surfing Lesson</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Experience the thrill of riding Bali's famous waves with expert instructors</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Canggu</span>
+                        </div>
+                        <button class="btn-primary w-full">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Temple Tour -->
+                <div class="natural-card animate-fade-in-up stagger-3">
+                    <div class="image-overlay h-64">
+                        <img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Sacred Temple Tour" class="w-full h-full object-cover">
+                        <div class="price-tag">
+                            <p class="font-bold text-foreground">$65 USD</p>
+                            <p class="text-sm text-foreground opacity-70">Rp 975,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="category-badge badge-jungle">Culture</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 rating-stars fill-current"></i>
+                                <span class="text-foreground font-semibold">4.9</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Sacred Temple Tour</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Discover ancient Balinese spirituality and stunning temple architecture</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Ubud</span>
+                        </div>
+                        <button class="btn-primary w-full">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Snorkeling -->
+                <div class="natural-card animate-fade-in-up stagger-4">
+                    <div class="image-overlay h-64">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Nusa Penida Snorkeling" class="w-full h-full object-cover">
+                        <div class="price-tag">
+                            <p class="font-bold text-foreground">$55 USD</p>
+                            <p class="text-sm text-foreground opacity-70">Rp 825,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="category-badge badge-sunset">Island Hopping</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 rating-stars fill-current"></i>
+                                <span class="text-foreground font-semibold">5.0</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Nusa Penida Snorkeling</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Swim with manta rays and explore vibrant coral reefs</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Nusa Penida</span>
+                        </div>
+                        <button class="btn-primary w-full">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Sunset Dinner -->
+                <div class="natural-card animate-fade-in-up stagger-5">
+                    <div class="image-overlay h-64">
+                        <img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Jimbaran Beach Dinner" class="w-full h-full object-cover">
+                        <div class="price-tag">
+                            <p class="font-bold text-foreground">$85 USD</p>
+                            <p class="text-sm text-foreground opacity-70">Rp 1,275,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="category-badge badge-coral">Sunset Experience</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 rating-stars fill-current"></i>
+                                <span class="text-foreground font-semibold">4.9</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Jimbaran Beach Dinner</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Romantic seafood dinner on the beach with stunning sunset views</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Jimbaran</span>
+                        </div>
+                        <button class="btn-primary w-full">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl sm:text-5xl font-bold text-foreground mb-4 animate-fade-in-up">
+                    Why Choose BaliOkayTravel
+                </h2>
+                <p class="text-xl text-foreground opacity-80 max-w-2xl mx-auto animate-fade-in-up stagger-1">
+                    We make your Bali experience unforgettable
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card animate-fade-in-up stagger-2">
+                    <div class="feature-icon icon-jungle">
+                        <i data-lucide="shield-check" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-foreground mb-2">Secure Booking</h3>
+                    <p class="text-foreground opacity-80">Your payments are protected with industry-leading security</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card animate-fade-in-up stagger-3">
+                    <div class="feature-icon icon-sunset">
+                        <i data-lucide="star" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-foreground mb-2">Expert Guides</h3>
+                    <p class="text-foreground opacity-80">Local experts who know Bali inside and out</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card animate-fade-in-up stagger-4">
+                    <div class="feature-icon icon-ocean">
+                        <i data-lucide="users" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-foreground mb-2">Small Groups</h3>
+                    <p class="text-foreground opacity-80">Intimate experiences with maximum 15 people</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card animate-fade-in-up stagger-5">
+                    <div class="feature-icon icon-coral">
+                        <i data-lucide="headphones" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-foreground mb-2">24/7 Support</h3>
+                    <p class="text-foreground opacity-80">We're here to help before, during, and after your trip</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-ocean relative overflow-hidden">
+        <!-- Natural Elements -->
+        <div class="leaf-decoration" style="top: 10%; left: 5%;"></div>
+        <div class="wave-decoration" style="bottom: 15%; right: 10%;"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl p-12 animate-scale-in">
+                <h2 class="text-4xl sm:text-5xl font-bold text-foreground mb-6">
+                    Ready for Your Bali Adventure?
+                </h2>
+                <p class="text-xl text-foreground opacity-80 mb-8 max-w-2xl mx-auto">
+                    Join thousands of travelers who have discovered paradise with BaliOkayTravel
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="btn-primary px-8 py-4 rounded-2xl text-white font-semibold text-lg flex items-center justify-center space-x-3">
+                        <i data-lucide="search" class="w-6 h-6"></i>
+                        <span>Explore Activities</span>
+                    </button>
+                    <button class="btn-secondary px-8 py-4 rounded-2xl text-white font-semibold text-lg flex items-center justify-center space-x-3">
+                        <i data-lucide="phone" class="w-6 h-6"></i>
+                        <span>Contact Us</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-foreground text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-12 h-12 rounded-full bg-jungle-green flex items-center justify-center">
+                            <i data-lucide="waves" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <span class="text-2xl font-bold">BaliOkayTravel</span>
+                    </div>
+                    <p class="text-white opacity-70 mb-6 max-w-md">
+                        Your trusted partner for unforgettable Bali experiences. Discover 13 stunning areas and 8 exciting activity categories.
+                    </p>
+                    <div class="flex space-x-4">
+                        <button class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i data-lucide="facebook" class="w-5 h-5 text-white"></i>
+                        </button>
+                        <button class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i data-lucide="instagram" class="w-5 h-5 text-white"></i>
+                        </button>
+                        <button class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5 text-white"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white opacity-70 hover:opacity-100 transition-all">About Us</a></li>
+                        <li><a href="#" class="text-white opacity-70 hover:opacity-100 transition-all">Activities</a></li>
+                        <li><a href="#" class="text-white opacity-70 hover:opacity-100 transition-all">Areas</a></li>
+                        <li><a href="#" class="text-white opacity-70 hover:opacity-100 transition-all">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Support</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-white opacity-70 hover:opacity-100 transition-all">Help Center</a></li>
+                        <li><a href="#" class="text-white opacity-70 hover:opacity-100 transition-all">Booking Policy</a></li>
+                        <li><a href="#" class="text-white opacity-70 hover:opacity-100 transition-all">Privacy Policy</a></li>
+                        <li><a href="#" class="text-white opacity-70 hover:opacity-100 transition-all">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-white border-opacity-20 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <p class="text-white opacity-60 text-sm">
+                        © 2025 BaliOkayTravel. All rights reserved.
+                    </p>
+                    <div class="flex items-center space-x-6">
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="shield-check" class="w-5 h-5 text-white opacity-60"></i>
+                            <span class="text-white opacity-60 text-sm">Secure Payment</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i data-lucide="globe" class="w-5 h-5 text-white opacity-60"></i>
+                            <span class="text-white opacity-60 text-sm">IDR / USD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

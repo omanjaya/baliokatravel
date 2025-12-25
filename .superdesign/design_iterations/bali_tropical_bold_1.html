@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaliOkayTravel - Discover Paradise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif !important;
+            overflow-x: hidden;
+            background: #FFFFFF;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif !important;
+            font-weight: 800 !important;
+        }
+
+        /* Tropical Sunset Color Palette */
+        :root {
+            --sunset-orange: #FF6B35;
+            --sunset-pink: #FF006E;
+            --sunset-coral: #FF5E78;
+            --sunset-yellow: #FFB627;
+            --sunset-purple: #8338EC;
+            --sunset-violet: #C77DFF;
+            --sunset-deep: #FB5607;
+            --ocean-blue: #0096FF;
+            --palm-green: #06D6A0;
+            --text-black: #000000;
+            --text-white: #FFFFFF;
+        }
+
+        /* Hero Gradient */
+        .hero-gradient {
+            background: linear-gradient(135deg,
+                #FF6B35 0%,
+                #FF5E78 25%,
+                #FF006E 50%,
+                #C77DFF 75%,
+                #8338EC 100%);
+            animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Card Gradients */
+        .card-gradient-1 {
+            background: linear-gradient(135deg, #FF6B35 0%, #FFB627 100%);
+        }
+
+        .card-gradient-2 {
+            background: linear-gradient(135deg, #FF006E 0%, #FF5E78 100%);
+        }
+
+        .card-gradient-3 {
+            background: linear-gradient(135deg, #8338EC 0%, #C77DFF 100%);
+        }
+
+        .card-gradient-4 {
+            background: linear-gradient(135deg, #06D6A0 0%, #0096FF 100%);
+        }
+
+        .card-gradient-5 {
+            background: linear-gradient(135deg, #FFB627 0%, #FF006E 100%);
+        }
+
+        .card-gradient-6 {
+            background: linear-gradient(135deg, #FF5E78 0%, #8338EC 100%);
+        }
+
+        .card-gradient-7 {
+            background: linear-gradient(135deg, #0096FF 0%, #06D6A0 100%);
+        }
+
+        .card-gradient-8 {
+            background: linear-gradient(135deg, #C77DFF 0%, #FF6B35 100%);
+        }
+
+        /* Bold Shadows */
+        .shadow-bold {
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .shadow-mega {
+            box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.4);
+        }
+
+        .shadow-float {
+            box-shadow: 0 16px 48px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Animations */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(100px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-16px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .animate-bounce-in {
+            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .animate-slide-left {
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        .animate-slide-right {
+            animation: slideInRight 0.6s ease-out;
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Hover Effects */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 16px 16px 0px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-hover {
+            transition: all 0.2s ease;
+        }
+
+        .btn-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-hover:active {
+            transform: scale(0.98);
+        }
+
+        /* Badge Styles */
+        .badge-gradient-1 {
+            background: linear-gradient(135deg, #FF6B35 0%, #FFB627 100%);
+        }
+
+        .badge-gradient-2 {
+            background: linear-gradient(135deg, #06D6A0 0%, #0096FF 100%);
+        }
+
+        .badge-gradient-3 {
+            background: linear-gradient(135deg, #FF006E 0%, #C77DFF 100%);
+        }
+
+        .badge-gradient-4 {
+            background: linear-gradient(135deg, #8338EC 0%, #FF5E78 100%);
+        }
+
+        /* Search Widget */
+        .search-widget {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Price Tag */
+        .price-tag {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Rating Stars */
+        .star-rating {
+            background: rgba(255, 182, 39, 1);
+            color: black;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 24px;
+            box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Category Card */
+        .category-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            height: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        .category-card:hover .category-overlay {
+            background: rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-bold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-8">
+                    <h1 class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text" style="background: linear-gradient(135deg, #FF6B35 0%, #FF006E 100%);">
+                        BaliOkay
+                    </h1>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-black font-semibold hover:text-[#FF6B35] transition">Activities</a>
+                    <a href="#" class="text-black font-semibold hover:text-[#FF6B35] transition">Locations</a>
+                    <a href="#" class="text-black font-semibold hover:text-[#FF6B35] transition">Deals</a>
+                    <button class="px-6 py-3 bg-gradient-to-r from-[#FF6B35] to-[#FF006E] text-white font-bold rounded-lg btn-hover">
+                        Book Now
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="h-[85vh] hero-gradient flex items-center justify-center relative overflow-hidden mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 w-full">
+            <div class="text-center mb-16 animate-bounce-in">
+                <h2 class="text-5xl sm:text-7xl md:text-8xl font-black text-white mb-6 drop-shadow-lg">
+                    Discover Paradise
+                </h2>
+                <p class="text-xl sm:text-2xl md:text-3xl text-white font-bold mb-0 drop-shadow-md">
+                    Experience Bali's Best Adventures
+                </p>
+            </div>
+
+            <!-- Search Widget -->
+            <div class="search-widget max-w-4xl mx-auto p-8 animate-slide-left">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Location -->
+                    <div>
+                        <label class="block text-black font-bold mb-2 text-sm">Where to?</label>
+                        <div class="relative">
+                            <i data-lucide="map-pin" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#FF6B35]"></i>
+                            <select class="w-full pl-12 pr-4 py-4 border-4 border-black rounded-lg font-semibold focus:outline-none focus:border-[#FF6B35] transition">
+                                <option>Ubud</option>
+                                <option>Seminyak</option>
+                                <option>Canggu</option>
+                                <option>Nusa Dua</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Activity -->
+                    <div>
+                        <label class="block text-black font-bold mb-2 text-sm">What to do?</label>
+                        <div class="relative">
+                            <i data-lucide="compass" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#FF006E]"></i>
+                            <select class="w-full pl-12 pr-4 py-4 border-4 border-black rounded-lg font-semibold focus:outline-none focus:border-[#FF006E] transition">
+                                <option>Water Sports</option>
+                                <option>Adventure</option>
+                                <option>Culture</option>
+                                <option>Wellness</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Date -->
+                    <div>
+                        <label class="block text-black font-bold mb-2 text-sm">When?</label>
+                        <div class="relative">
+                            <i data-lucide="calendar" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8338EC]"></i>
+                            <input type="date" class="w-full pl-12 pr-4 py-4 border-4 border-black rounded-lg font-semibold focus:outline-none focus:border-[#8338EC] transition">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="w-full mt-8 py-5 bg-gradient-to-r from-[#FF6B35] via-[#FF006E] to-[#8338EC] text-white font-black text-xl rounded-lg shadow-mega btn-hover">
+                    SEARCH ACTIVITIES
+                </button>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 animate-float" style="animation-delay: 0s;">
+            <div class="w-16 h-16 rounded-full bg-[#FFB627] opacity-60"></div>
+        </div>
+        <div class="absolute top-40 right-20 animate-float" style="animation-delay: 1s;">
+            <div class="w-24 h-24 rounded-full bg-[#06D6A0] opacity-60"></div>
+        </div>
+        <div class="absolute bottom-32 left-1/4 animate-float" style="animation-delay: 2s;">
+            <div class="w-20 h-20 rounded-full bg-[#C77DFF] opacity-60"></div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center badge-gradient-1 p-8 rounded-2xl shadow-bold card-hover animate-slide-left" style="animation-delay: 0.1s;">
+                    <div class="flex justify-center mb-4">
+                        <i data-lucide="shield-check" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-white mb-2">100%</h3>
+                    <p class="text-white font-bold">Verified</p>
+                </div>
+
+                <div class="text-center badge-gradient-2 p-8 rounded-2xl shadow-bold card-hover animate-slide-left" style="animation-delay: 0.2s;">
+                    <div class="flex justify-center mb-4">
+                        <i data-lucide="star" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-white mb-2">4.9★</h3>
+                    <p class="text-white font-bold">Rating</p>
+                </div>
+
+                <div class="text-center badge-gradient-3 p-8 rounded-2xl shadow-bold card-hover animate-slide-left" style="animation-delay: 0.3s;">
+                    <div class="flex justify-center mb-4">
+                        <i data-lucide="users" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-white mb-2">50K+</h3>
+                    <p class="text-white font-bold">Happy Guests</p>
+                </div>
+
+                <div class="text-center badge-gradient-4 p-8 rounded-2xl shadow-bold card-hover animate-slide-left" style="animation-delay: 0.4s;">
+                    <div class="flex justify-center mb-4">
+                        <i data-lucide="zap" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-white mb-2">24/7</h3>
+                    <p class="text-white font-bold">Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Activities -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <h2 class="text-4xl sm:text-6xl font-black text-black mb-4 text-center">Hot Deals Today!</h2>
+            <p class="text-xl text-black text-center mb-16 font-semibold">Limited time offers - Book now!</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Activity Card 1 -->
+                <div class="card-gradient-1 rounded-2xl overflow-hidden shadow-bold card-hover">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="star-rating">
+                                ★ 4.9
+                            </div>
+                            <i data-lucide="heart" class="w-6 h-6 text-white"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-black text-white mb-2">Surfing Lesson</h3>
+                        <div class="flex items-center text-white mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span class="font-bold">Canggu Beach</span>
+                        </div>
+
+                        <div class="flex items-center text-white mb-6">
+                            <i data-lucide="clock" class="w-4 h-4 mr-2"></i>
+                            <span class="font-bold">2 Hours</span>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="price-tag">
+                                $45
+                            </div>
+                            <button class="px-6 py-3 bg-white text-black font-black rounded-lg btn-hover">
+                                BOOK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Card 2 -->
+                <div class="card-gradient-2 rounded-2xl overflow-hidden shadow-bold card-hover">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="star-rating">
+                                ★ 5.0
+                            </div>
+                            <i data-lucide="heart" class="w-6 h-6 text-white"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-black text-white mb-2">Temple Tour</h3>
+                        <div class="flex items-center text-white mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span class="font-bold">Ubud</span>
+                        </div>
+
+                        <div class="flex items-center text-white mb-6">
+                            <i data-lucide="clock" class="w-4 h-4 mr-2"></i>
+                            <span class="font-bold">4 Hours</span>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="price-tag">
+                                $65
+                            </div>
+                            <button class="px-6 py-3 bg-white text-black font-black rounded-lg btn-hover">
+                                BOOK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Card 3 -->
+                <div class="card-gradient-3 rounded-2xl overflow-hidden shadow-bold card-hover">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="star-rating">
+                                ★ 4.8
+                            </div>
+                            <i data-lucide="heart" class="w-6 h-6 text-white"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-black text-white mb-2">Spa Package</h3>
+                        <div class="flex items-center text-white mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span class="font-bold">Seminyak</span>
+                        </div>
+
+                        <div class="flex items-center text-white mb-6">
+                            <i data-lucide="clock" class="w-4 h-4 mr-2"></i>
+                            <span class="font-bold">3 Hours</span>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="price-tag">
+                                $85
+                            </div>
+                            <button class="px-6 py-3 bg-white text-black font-black rounded-lg btn-hover">
+                                BOOK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Card 4 -->
+                <div class="card-gradient-4 rounded-2xl overflow-hidden shadow-bold card-hover">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="star-rating">
+                                ★ 4.9
+                            </div>
+                            <i data-lucide="heart" class="w-6 h-6 text-white"></i>
+                        </div>
+
+                        <h3 class="text-2xl font-black text-white mb-2">Snorkeling</h3>
+                        <div class="flex items-center text-white mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span class="font-bold">Nusa Penida</span>
+                        </div>
+
+                        <div class="flex items-center text-white mb-6">
+                            <i data-lucide="clock" class="w-4 h-4 mr-2"></i>
+                            <span class="font-bold">6 Hours</span>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="price-tag">
+                                $95
+                            </div>
+                            <button class="px-6 py-3 bg-white text-black font-black rounded-lg btn-hover">
+                                BOOK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-24 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <h2 class="text-4xl sm:text-6xl font-black text-black mb-4 text-center">Explore by Category</h2>
+            <p class="text-xl text-black text-center mb-16 font-semibold">Find your perfect adventure</p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Category 1 -->
+                <div class="category-card card-gradient-1 shadow-bold">
+                    <div class="category-overlay">
+                        <div class="text-center">
+                            <i data-lucide="waves" class="w-16 h-16 text-white mb-4 mx-auto"></i>
+                            <h3 class="text-2xl font-black text-white">Water Sports</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="category-card card-gradient-2 shadow-bold">
+                    <div class="category-overlay">
+                        <div class="text-center">
+                            <i data-lucide="mountain" class="w-16 h-16 text-white mb-4 mx-auto"></i>
+                            <h3 class="text-2xl font-black text-white">Adventure</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="category-card card-gradient-3 shadow-bold">
+                    <div class="category-overlay">
+                        <div class="text-center">
+                            <i data-lucide="landmark" class="w-16 h-16 text-white mb-4 mx-auto"></i>
+                            <h3 class="text-2xl font-black text-white">Culture</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="category-card card-gradient-4 shadow-bold">
+                    <div class="category-overlay">
+                        <div class="text-center">
+                            <i data-lucide="utensils" class="w-16 h-16 text-white mb-4 mx-auto"></i>
+                            <h3 class="text-2xl font-black text-white">Culinary</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 5 -->
+                <div class="category-card card-gradient-5 shadow-bold">
+                    <div class="category-overlay">
+                        <div class="text-center">
+                            <i data-lucide="sparkles" class="w-16 h-16 text-white mb-4 mx-auto"></i>
+                            <h3 class="text-2xl font-black text-white">Wellness</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 6 -->
+                <div class="category-card card-gradient-6 shadow-bold">
+                    <div class="category-overlay">
+                        <div class="text-center">
+                            <i data-lucide="camera" class="w-16 h-16 text-white mb-4 mx-auto"></i>
+                            <h3 class="text-2xl font-black text-white">Sightseeing</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 7 -->
+                <div class="category-card card-gradient-7 shadow-bold">
+                    <div class="category-overlay">
+                        <div class="text-center">
+                            <i data-lucide="anchor" class="w-16 h-16 text-white mb-4 mx-auto"></i>
+                            <h3 class="text-2xl font-black text-white">Island Hopping</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category 8 -->
+                <div class="category-card card-gradient-8 shadow-bold">
+                    <div class="category-overlay">
+                        <div class="text-center">
+                            <i data-lucide="sunset" class="w-16 h-16 text-white mb-4 mx-auto"></i>
+                            <h3 class="text-2xl font-black text-white">Sunset</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-gradient-to-r from-[#FF6B35] via-[#FF006E] to-[#8338EC] relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8 text-center relative z-10">
+            <h2 class="text-4xl sm:text-6xl font-black text-white mb-6 animate-pulse-slow">
+                Ready for Adventure?
+            </h2>
+            <p class="text-xl sm:text-2xl text-white font-bold mb-12">
+                Book now and get 20% off your first activity!
+            </p>
+            <button class="px-12 py-6 bg-white text-black text-2xl font-black rounded-2xl shadow-mega btn-hover">
+                START EXPLORING
+            </button>
+        </div>
+
+        <!-- Floating circles -->
+        <div class="absolute top-10 left-10 w-32 h-32 bg-white opacity-10 rounded-full animate-float"></div>
+        <div class="absolute bottom-10 right-10 w-40 h-40 bg-white opacity-10 rounded-full animate-float" style="animation-delay: 1.5s;"></div>
+        <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-white opacity-10 rounded-full animate-float" style="animation-delay: 0.5s;"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <h3 class="text-2xl font-black mb-6 text-transparent bg-clip-text" style="background: linear-gradient(135deg, #FF6B35 0%, #FF006E 100%);">
+                        BaliOkay
+                    </h3>
+                    <p class="text-gray-400 font-semibold">
+                        Your gateway to unforgettable Bali experiences.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-black mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-[#FF6B35] transition font-semibold">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FF6B35] transition font-semibold">Activities</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FF6B35] transition font-semibold">Locations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FF6B35] transition font-semibold">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-black mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-[#FF6B35] transition font-semibold">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FF6B35] transition font-semibold">Booking Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FF6B35] transition font-semibold">Privacy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FF6B35] transition font-semibold">Terms</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-black mb-6">Connect</h4>
+                    <div class="flex space-x-4">
+                        <button class="w-12 h-12 bg-gradient-to-r from-[#FF6B35] to-[#FF006E] rounded-full flex items-center justify-center btn-hover">
+                            <i data-lucide="facebook" class="w-6 h-6 text-white"></i>
+                        </button>
+                        <button class="w-12 h-12 bg-gradient-to-r from-[#FF006E] to-[#8338EC] rounded-full flex items-center justify-center btn-hover">
+                            <i data-lucide="instagram" class="w-6 h-6 text-white"></i>
+                        </button>
+                        <button class="w-12 h-12 bg-gradient-to-r from-[#8338EC] to-[#06D6A0] rounded-full flex items-center justify-center btn-hover">
+                            <i data-lucide="twitter" class="w-6 h-6 text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 font-semibold">
+                    © 2025 BaliOkayTravel. All rights reserved. Made with ❤️ in Bali
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.card-hover, .category-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+
+                this.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+</body>
+</html>

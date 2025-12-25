@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaliOkayTravel - Product Detail</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./bali_tropical_luxury_theme.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Figtree', sans-serif !important;
+            background-color: var(--background) !important;
+            color: var(--foreground) !important;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 700 !important;
+        }
+
+        /* Glassmorphism Effects */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-ultra {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Card Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        /* Stagger animations */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        .stagger-7 { animation-delay: 0.7s; }
+        .stagger-8 { animation-delay: 0.8s; }
+
+        /* Button Effects */
+        .btn-primary {
+            background: var(--ocean-blue);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--ocean-blue-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--sunset-gold);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--sunset-gold-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-accent {
+            background: var(--jungle-green);
+            transition: all 0.3s ease;
+        }
+
+        .btn-accent:hover {
+            background: var(--jungle-green-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Heart Icon Animation */
+        .heart-icon {
+            transition: all 0.3s ease;
+        }
+
+        .heart-icon:hover {
+            transform: scale(1.2);
+            fill: var(--coral);
+            stroke: var(--coral);
+        }
+
+        /* Input Focus Effects */
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+            box-shadow: 0 0 0 3px rgba(12, 74, 110, 0.1);
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .ripple:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Accordion Styles */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 1000px;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-icon.active {
+            transform: rotate(180deg);
+        }
+
+        /* Image Gallery */
+        .gallery-thumbnail {
+            transition: all 0.3s ease;
+        }
+
+        .gallery-thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-thumbnail.active {
+            border: 2px solid var(--ocean-blue);
+        }
+
+        /* Sticky Sidebar */
+        .sticky-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        /* Mobile Bottom Bar */
+        .mobile-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 40;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-bottom-bar.active {
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--muted);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--ocean-blue);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--ocean-blue-light);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb-item:not(:last-child)::after {
+            content: '/';
+            margin: 0 0.5rem;
+            color: var(--muted-foreground);
+        }
+
+        /* Rating Stars */
+        .rating-star {
+            color: var(--sunset-gold);
+        }
+
+        /* Tab Styles */
+        .tab-active {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        /* Review Card */
+        .review-card {
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 animate-fade-in">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-ocean-blue to-ocean-blue-light flex items-center justify-center">
+                        <i data-lucide="waves" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-foreground">BaliOkayTravel</span>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8 animate-fade-in stagger-1">
+                    <a href="#" class="text-foreground hover:text-ocean-blue transition-all duration-300 font-medium">Activities</a>
+                    <a href="#" class="text-foreground hover:text-ocean-blue transition-all duration-300 font-medium">Areas</a>
+                    <a href="#" class="text-foreground hover:text-ocean-blue transition-all duration-300 font-medium">About</a>
+                    <a href="#" class="text-foreground hover:text-ocean-blue transition-all duration-300 font-medium">Contact</a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex items-center space-x-4 animate-fade-in stagger-2">
+                    <button class="hidden sm:block glass px-6 py-2 rounded-full text-foreground font-medium ripple">
+                        Sign In
+                    </button>
+                    <button class="btn-primary px-6 py-2 rounded-full text-white font-medium ripple">
+                        Book Now
+                    </button>
+                    <!-- Mobile Menu -->
+                    <button id="mobile-menu-btn" class="md:hidden text-foreground">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Image -->
+    <section class="relative pt-16">
+        <div class="relative h-96 md:h-[500px] overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Sacred Temple Tour" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            
+            <!-- Breadcrumb -->
+            <div class="absolute bottom-4 left-4 right-4 z-10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <nav class="flex text-white text-sm">
+                        <span class="breadcrumb-item">Home</span>
+                        <span class="breadcrumb-item">Activities</span>
+                        <span class="breadcrumb-item">Culture</span>
+                        <span>Sacred Temple Tour</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Detail Content -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Title and Basic Info -->
+                    <div class="mb-8 animate-fade-in-up">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-jungle-green text-white px-3 py-1 rounded-full text-sm font-medium">Culture</span>
+                            <button class="heart-icon">
+                                <i data-lucide="heart" class="w-6 h-6 text-foreground"></i>
+                            </button>
+                        </div>
+                        <h1 class="text-3xl md:text-4xl font-bold text-foreground mb-4">Sacred Temple Tour</h1>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex items-center">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-foreground opacity-70 mr-2"></i>
+                                <span class="text-foreground opacity-70">Ubud, Bali</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="clock" class="w-5 h-5 text-foreground opacity-70 mr-2"></i>
+                                <span class="text-foreground opacity-70">8 hours</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="users" class="w-5 h-5 text-foreground opacity-70 mr-2"></i>
+                                <span class="text-foreground opacity-70">Max 15 people</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="flex">
+                                <i data-lucide="star" class="w-5 h-5 rating-star fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 rating-star fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 rating-star fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 rating-star fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 rating-star fill-current"></i>
+                            </div>
+                            <span class="text-foreground font-semibold">4.9</span>
+                            <span class="text-foreground opacity-70">(127 reviews)</span>
+                        </div>
+                    </div>
+
+                    <!-- Image Gallery -->
+                    <div class="mb-12 animate-fade-in-up stagger-1">
+                        <h2 class="text-2xl font-bold text-foreground mb-6">Gallery</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="col-span-2 row-span-2">
+                                <img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Temple 1" class="w-full h-full object-cover rounded-xl">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Temple 2" class="w-full h-48 object-cover rounded-xl gallery-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Temple 3" class="w-full h-48 object-cover rounded-xl gallery-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Temple 4" class="w-full h-48 object-cover rounded-xl gallery-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Temple 5" class="w-full h-48 object-cover rounded-xl gallery-thumbnail">
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-12 animate-fade-in-up stagger-2">
+                        <h2 class="text-2xl font-bold text-foreground mb-6">About This Experience</h2>
+                        <div class="prose prose-lg max-w-none">
+                            <p class="text-foreground opacity-80 mb-4">
+                                Immerse yourself in the spiritual heart of Bali with our Sacred Temple Tour. This journey takes you to the island's most revered temples, where ancient traditions and stunning architecture create an unforgettable experience.
+                            </p>
+                            <p class="text-foreground opacity-80 mb-4">
+                                Your expert guide will share the rich history and cultural significance of each temple, explaining the intricate carvings, symbolic offerings, and daily rituals that have been preserved for centuries. You'll witness firsthand the deep spiritual connection that Balinese people have with their sacred spaces.
+                            </p>
+                            <p class="text-foreground opacity-80">
+                                This tour includes visits to three major temples: Tirta Empul with its holy spring waters, Tanah Lot perched on a rocky outcrop in the sea, and Ulun Danu Beratan nestled by the lake. Each offers a unique glimpse into Bali's diverse religious practices and breathtaking natural beauty.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Itinerary -->
+                    <div class="mb-12 animate-fade-in-up stagger-3">
+                        <div class="glass-card rounded-2xl p-6">
+                            <button class="accordion-trigger flex items-center justify-between w-full text-left" onclick="toggleAccordion(this)">
+                                <h2 class="text-2xl font-bold text-foreground">Itinerary</h2>
+                                <i data-lucide="chevron-down" class="w-6 h-6 text-foreground accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content mt-6">
+                                <div class="space-y-6">
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-ocean-blue rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                            1
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-foreground mb-2">8:00 AM - Hotel Pickup</h3>
+                                            <p class="text-foreground opacity-80">Your guide will pick you up from your hotel in a comfortable air-conditioned vehicle.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-ocean-blue rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                            2
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-foreground mb-2">9:00 AM - Tirta Empul Temple</h3>
+                                            <p class="text-foreground opacity-80">Visit the holy water temple where locals and visitors participate in purification rituals. Learn about the significance of the spring waters and observe traditional ceremonies.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-ocean-blue rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                            3
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-foreground mb-2">11:00 AM - Coffee Plantation Visit</h3>
+                                            <p class="text-foreground opacity-80">Stop at a local coffee plantation to sample Bali's famous Luwak coffee and other traditional beverages while enjoying scenic views.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-ocean-blue rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                            4
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-foreground mb-2">1:00 PM - Lunch at Local Restaurant</h3>
+                                            <p class="text-foreground opacity-80">Enjoy an authentic Balinese lunch at a restaurant with panoramic views of rice terraces.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-ocean-blue rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                            5
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-foreground mb-2">2:30 PM - Tanah Lot Temple</h3>
+                                            <p class="text-foreground opacity-80">Explore the iconic sea temple, one of Bali's most important landmarks. Perfect timing for photos as the afternoon light creates stunning views.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-ocean-blue rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                            6
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-foreground mb-2">4:00 PM - Return to Hotel</h3>
+                                            <p class="text-foreground opacity-80">Relax on the journey back to your hotel, arriving around 5:00 PM.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- What's Included -->
+                    <div class="mb-12 animate-fade-in-up stagger-4">
+                        <div class="glass-card rounded-2xl p-6">
+                            <button class="accordion-trigger flex items-center justify-between w-full text-left" onclick="toggleAccordion(this)">
+                                <h2 class="text-2xl font-bold text-foreground">What's Included</h2>
+                                <i data-lucide="chevron-down" class="w-6 h-6 text-foreground accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content mt-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-foreground mb-4 flex items-center">
+                                            <i data-lucide="check-circle" class="w-5 h-5 text-jungle-green mr-2"></i>
+                                            Included
+                                        </h3>
+                                        <ul class="space-y-2">
+                                            <li class="flex items-start">
+                                                <i data-lucide="check" class="w-5 h-5 text-jungle-green mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">Hotel pickup and drop-off</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i data-lucide="check" class="w-5 h-5 text-jungle-green mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">Transportation in air-conditioned vehicle</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i data-lucide="check" class="w-5 h-5 text-jungle-green mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">English-speaking guide</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i data-lucide="check" class="w-5 h-5 text-jungle-green mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">All entrance fees</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i data-lucide="check" class="w-5 h-5 text-jungle-green mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">Bottled water</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i data-lucide="check" class="w-5 h-5 text-jungle-green mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">Balinese lunch</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i data-lucide="check" class="w-5 h-5 text-jungle-green mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">Coffee tasting</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-foreground mb-4 flex items-center">
+                                            <i data-lucide="x-circle" class="w-5 h-5 text-coral mr-2"></i>
+                                            Not Included
+                                        </h3>
+                                        <ul class="space-y-2">
+                                            <li class="flex items-start">
+                                                <i data-lucide="x" class="w-5 h-5 text-coral mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">Personal expenses</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i data-lucide="x" class="w-5 h-5 text-coral mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">Temple offerings (optional)</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i data-lucide="x" class="w-5 h-5 text-coral mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">Additional drinks and snacks</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <i data-lucide="x" class="w-5 h-5 text-coral mr-2 mt-0.5 flex-shrink-0"></i>
+                                                <span class="text-foreground opacity-80">Travel insurance</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div class="mb-12 animate-fade-in-up stagger-5">
+                        <div class="glass-card rounded-2xl p-6">
+                            <button class="accordion-trigger flex items-center justify-between w-full text-left" onclick="toggleAccordion(this)">
+                                <h2 class="text-2xl font-bold text-foreground">Frequently Asked Questions</h2>
+                                <i data-lucide="chevron-down" class="w-6 h-6 text-foreground accordion-icon"></i>
+                            </button>
+                            <div class="accordion-content mt-6">
+                                <div class="space-y-6">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-foreground mb-2">What should I wear for the temple visit?</h3>
+                                        <p class="text-foreground opacity-80">Both men and women should cover their shoulders and knees. Sarongs are usually available for rent at temple entrances if needed.</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-foreground mb-2">Can I participate in the water purification ritual?</h3>
+                                        <p class="text-foreground opacity-80">Yes, visitors are welcome to participate in the purification ritual at Tirta Empul. Your guide will explain the proper procedure and etiquette.</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-foreground mb-2">Is this tour suitable for children?</h3>
+                                        <p class="text-foreground opacity-80">Yes, this tour is family-friendly. However, there is some walking involved, so it may not be suitable for very young children or those with mobility issues.</p>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-foreground mb-2">What happens if it rains?</h3>
+                                        <p class="text-foreground opacity-80">The tour operates in light rain. Umbrellas are provided. In case of severe weather, the itinerary may be adjusted for your safety and comfort.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews -->
+                    <div class="mb-12 animate-fade-in-up stagger-6">
+                        <h2 class="text-2xl font-bold text-foreground mb-6">Reviews</h2>
+                        <div class="space-y-6">
+                            <!-- Review 1 -->
+                            <div class="glass-card rounded-2xl p-6 review-card">
+                                <div class="flex items-center mb-4">
+                                    <img src="https://picsum.photos/seed/user1/50/50.jpg" alt="Reviewer" class="w-12 h-12 rounded-full mr-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-foreground">Sarah Johnson</h3>
+                                        <div class="flex items-center">
+                                            <div class="flex">
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                            </div>
+                                            <span class="text-foreground opacity-70 ml-2">2 weeks ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-foreground opacity-80">
+                                    An incredible experience! Our guide was knowledgeable and passionate about Balinese culture. The temples were breathtaking, especially Tirta Empul where we participated in the purification ritual. Highly recommend this tour to anyone visiting Bali!
+                                </p>
+                            </div>
+
+                            <!-- Review 2 -->
+                            <div class="glass-card rounded-2xl p-6 review-card">
+                                <div class="flex items-center mb-4">
+                                    <img src="https://picsum.photos/seed/user2/50/50.jpg" alt="Reviewer" class="w-12 h-12 rounded-full mr-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-foreground">Michael Chen</h3>
+                                        <div class="flex items-center">
+                                            <div class="flex">
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                            </div>
+                                            <span class="text-foreground opacity-70 ml-2">1 month ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-foreground opacity-80">
+                                    This tour was the highlight of our Bali trip! The temples were stunning and our guide provided so much interesting information about Balinese Hinduism. The lunch at the restaurant with rice terrace views was amazing. Tanah Lot at sunset was absolutely magical.
+                                </p>
+                            </div>
+
+                            <!-- Review 3 -->
+                            <div class="glass-card rounded-2xl p-6 review-card">
+                                <div class="flex items-center mb-4">
+                                    <img src="https://picsum.photos/seed/user3/50/50.jpg" alt="Reviewer" class="w-12 h-12 rounded-full mr-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-foreground">Emma Wilson</h3>
+                                        <div class="flex items-center">
+                                            <div class="flex">
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 rating-star fill-current"></i>
+                                                <i data-lucide="star" class="w-4 h-4 text-gray-300"></i>
+                                            </div>
+                                            <span class="text-foreground opacity-70 ml-2">1 month ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-foreground opacity-80">
+                                    Great tour with beautiful temples. Our guide was friendly and answered all our questions. The only reason I'm giving 4 stars is that it felt a bit rushed at times. I wish we had more time to explore each temple. Still, I would recommend this tour!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="glass-card rounded-2xl p-6 sticky-sidebar animate-fade-in-up">
+                        <h2 class="text-2xl font-bold text-foreground mb-6">Book This Experience</h2>
+                        
+                        <!-- Price -->
+                        <div class="mb-6">
+                            <div class="flex items-baseline">
+                                <span class="text-3xl font-bold text-foreground">$65</span>
+                                <span class="text-foreground opacity-70 ml-2">USD</span>
+                            </div>
+                            <p class="text-foreground opacity-70">per person</p>
+                        </div>
+
+                        <!-- Date Selector -->
+                        <div class="mb-6">
+                            <label class="block text-foreground font-medium mb-2">Select Date</label>
+                            <div class="relative">
+                                <i data-lucide="calendar" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-foreground opacity-70"></i>
+                                <input type="date" class="w-full glass-strong border-0 rounded-xl pl-12 pr-4 py-3 text-foreground focus:ring-2 focus:ring-ocean-blue focus:ring-opacity-30 transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Guest Selector -->
+                        <div class="mb-6">
+                            <label class="block text-foreground font-medium mb-2">Number of Guests</label>
+                            <div class="relative">
+                                <i data-lucide="users" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-foreground opacity-70"></i>
+                                <select class="w-full glass-strong border-0 rounded-xl pl-12 pr-4 py-3 text-foreground appearance-none cursor-pointer focus:ring-2 focus:ring-ocean-blue focus:ring-opacity-30 transition-all">
+                                    <option>1 Guest</option>
+                                    <option>2 Guests</option>
+                                    <option>3 Guests</option>
+                                    <option>4 Guests</option>
+                                    <option>5 Guests</option>
+                                    <option>6 Guests</option>
+                                    <option>7 Guests</option>
+                                    <option>8 Guests</option>
+                                    <option>9 Guests</option>
+                                    <option>10+ Guests</option>
+                                </select>
+                                <i data-lucide="chevron-down" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-foreground opacity-70 pointer-events-none"></i>
+                            </div>
+                        </div>
+
+                        <!-- Total Price -->
+                        <div class="mb-6 p-4 bg-sand rounded-xl">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-foreground opacity-80">Subtotal</span>
+                                <span class="text-foreground">$65</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-foreground opacity-80">Service Fee</span>
+                                <span class="text-foreground">$5</span>
+                            </div>
+                            <div class="border-t border-foreground opacity-20 pt-2 mt-2">
+                                <div class="flex justify-between">
+                                    <span class="text-foreground font-semibold">Total</span>
+                                    <span class="text-foreground font-bold text-xl">$70</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Book Now Button -->
+                        <button class="w-full btn-primary py-3 rounded-xl text-white font-semibold text-lg ripple mb-4">
+                            Book Now
+                        </button>
+
+                        <!-- Add to Wishlist -->
+                        <button class="w-full glass py-3 rounded-xl text-foreground font-semibold ripple flex items-center justify-center">
+                            <i data-lucide="heart" class="w-5 h-5 mr-2"></i>
+                            Add to Wishlist
+                        </button>
+
+                        <!-- Trust Badges -->
+                        <div class="mt-6 pt-6 border-t border-foreground opacity-20">
+                            <div class="flex items-center justify-center space-x-4">
+                                <div class="flex items-center">
+                                    <i data-lucide="shield-check" class="w-5 h-5 text-jungle-green mr-2"></i>
+                                    <span class="text-foreground opacity-70 text-sm">Secure Booking</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i data-lucide="refresh-cw" class="w-5 h-5 text-jungle-green mr-2"></i>
+                                    <span class="text-foreground opacity-70 text-sm">Free Cancellation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Bottom Bar -->
+    <div id="mobile-bottom-bar" class="mobile-bottom-bar glass-strong border-t border-foreground opacity-20 p-4">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-foreground opacity-70 text-sm">Total Price</p>
+                <p class="text-foreground font-bold text-xl">$70</p>
+            </div>
+            <button class="btn-primary px-8 py-3 rounded-xl text-white font-semibold">
+                Book Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+        
+        // Accordion Toggle
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.accordion-icon');
+            
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
+        
+        // Mobile Bottom Bar
+        window.addEventListener('scroll', () => {
+            const mobileBottomBar = document.getElementById('mobile-bottom-bar');
+            const bookingSidebar = document.querySelector('.sticky-sidebar');
+            
+            if (window.innerWidth < 1024) {
+                const rect = bookingSidebar.getBoundingClientRect();
+                
+                if (rect.bottom < window.innerHeight) {
+                    mobileBottomBar.classList.add('active');
+                } else {
+                    mobileBottomBar.classList.remove('active');
+                }
+            }
+        });
+        
+        // Open first accordion by default
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstAccordion = document.querySelector('.accordion-trigger');
+            if (firstAccordion) {
+                toggleAccordion(firstAccordion);
+            }
+        });
+    </script>
+</body>
+</html>

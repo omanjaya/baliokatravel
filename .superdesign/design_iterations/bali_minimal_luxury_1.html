@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaliOkayTravel - Minimal Zen Luxury</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1a2332;
+            --navy-light: #2d3e50;
+            --gold: #c9a869;
+            --gold-light: #d4b885;
+            --teal: #e8f4f3;
+            --teal-dark: #d1e9e6;
+            --white: #ffffff;
+            --off-white: #fafafa;
+            --spacing: 8px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif !important;
+            color: var(--navy) !important;
+            background: var(--white) !important;
+            line-height: 1.6 !important;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif !important;
+            font-weight: 400 !important;
+            letter-spacing: 0.02em !important;
+        }
+
+        h1 {
+            font-size: 4rem !important;
+            line-height: 1.1 !important;
+        }
+
+        h2 {
+            font-size: 2.5rem !important;
+            line-height: 1.2 !important;
+        }
+
+        h3 {
+            font-size: 1.5rem !important;
+        }
+
+        .text-navy {
+            color: var(--navy) !important;
+        }
+
+        .text-gold {
+            color: var(--gold) !important;
+        }
+
+        .bg-navy {
+            background-color: var(--navy) !important;
+        }
+
+        .bg-gold {
+            background-color: var(--gold) !important;
+        }
+
+        .bg-teal {
+            background-color: var(--teal) !important;
+        }
+
+        .border-gold {
+            border-color: var(--gold) !important;
+        }
+
+        .border-navy {
+            border-color: var(--navy) !important;
+        }
+
+        /* Hero Gradient */
+        .hero-gradient {
+            background: linear-gradient(135deg,
+                rgba(26, 35, 50, 0.03) 0%,
+                rgba(232, 244, 243, 0.4) 50%,
+                rgba(201, 168, 105, 0.08) 100%);
+        }
+
+        /* Card Gradients */
+        .card-gradient-1 {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--white) 100%);
+        }
+
+        .card-gradient-2 {
+            background: linear-gradient(135deg, rgba(201, 168, 105, 0.08) 0%, var(--white) 100%);
+        }
+
+        .card-gradient-3 {
+            background: linear-gradient(135deg, var(--white) 0%, var(--teal) 100%);
+        }
+
+        .card-gradient-4 {
+            background: linear-gradient(135deg, var(--white) 0%, rgba(201, 168, 105, 0.08) 100%);
+        }
+
+        /* Category Card Gradient */
+        .category-card {
+            background: linear-gradient(180deg, var(--white) 0%, var(--teal) 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-card:hover {
+            background: linear-gradient(180deg, var(--teal) 0%, var(--white) 100%);
+            transform: translateY(-4px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .delay-100 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        /* Sticky Nav */
+        .sticky-nav {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .sticky-nav.scrolled {
+            box-shadow: 0 1px 0 0 rgba(26, 35, 50, 0.08);
+        }
+
+        /* Smooth Hover Transitions */
+        .hover-lift {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+        }
+
+        /* Custom Input Focus */
+        input:focus, select:focus {
+            outline: none !important;
+            border-color: var(--gold) !important;
+            box-shadow: 0 0 0 2px rgba(201, 168, 105, 0.1) !important;
+        }
+
+        /* Thin Border Utility */
+        .border-thin {
+            border-width: 0.5px !important;
+        }
+
+        /* Letter Spacing */
+        .tracking-luxury {
+            letter-spacing: 0.08em !important;
+        }
+
+        /* Divider */
+        .divider {
+            height: 0.5px;
+            background: linear-gradient(90deg, transparent 0%, var(--navy) 50%, transparent 100%);
+            opacity: 0.15;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="sticky-nav fixed top-0 left-0 right-0 z-50 border-b border-thin border-navy" style="opacity: 0.05;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between" style="height: calc(var(--spacing) * 12);">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <div style="width: calc(var(--spacing) * 3); height: calc(var(--spacing) * 3);" class="bg-navy"></div>
+                    <span class="text-navy font-medium tracking-luxury" style="font-size: 0.875rem;">BALIOKAY</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-12">
+                    <a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">Activities</a>
+                    <a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">Areas</a>
+                    <a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">About</a>
+                    <a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">Contact</a>
+                </div>
+
+                <!-- CTA -->
+                <div class="flex items-center gap-4">
+                    <button class="hidden sm:block px-6 py-2 border border-thin border-navy text-navy hover:bg-navy hover:text-white transition-all duration-300" style="font-size: 0.875rem; font-weight: 300;">
+                        Book Now
+                    </button>
+                    <button class="md:hidden text-navy">
+                        <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient relative overflow-hidden animate-fade-in" style="height: 85vh; margin-top: calc(var(--spacing) * 12);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
+            <div class="max-w-3xl animate-fade-in-up">
+                <p class="text-gold tracking-luxury mb-4" style="font-size: 0.875rem; font-weight: 300;">DISCOVER BALI</p>
+                <h1 class="text-navy mb-6">Experience<br/>Timeless Luxury</h1>
+                <p class="text-navy mb-12" style="font-size: 1.125rem; font-weight: 300; line-height: 1.8; max-width: 600px;">
+                    Curated experiences across Bali's most enchanting destinations. Where tradition meets elegance.
+                </p>
+
+                <!-- Search Widget -->
+                <div class="bg-white p-8 border border-thin border-navy max-w-4xl animate-fade-in-up delay-200" style="opacity: 0;">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="md:col-span-2">
+                            <label class="block text-navy mb-2 tracking-luxury" style="font-size: 0.75rem; font-weight: 500;">EXPERIENCE</label>
+                            <input type="text" placeholder="Water sports, Culture..." class="w-full px-4 py-3 border border-thin border-navy bg-white text-navy transition-all duration-300" style="font-size: 0.875rem; font-weight: 300;">
+                        </div>
+                        <div>
+                            <label class="block text-navy mb-2 tracking-luxury" style="font-size: 0.75rem; font-weight: 500;">LOCATION</label>
+                            <select class="w-full px-4 py-3 border border-thin border-navy bg-white text-navy transition-all duration-300" style="font-size: 0.875rem; font-weight: 300;">
+                                <option>All Areas</option>
+                                <option>Ubud</option>
+                                <option>Seminyak</option>
+                                <option>Uluwatu</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                            <button class="w-full bg-navy text-white px-6 py-3 hover:bg-gold transition-all duration-300 flex items-center justify-center gap-2" style="font-size: 0.875rem; font-weight: 300;">
+                                <span>Search</span>
+                                <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="absolute bottom-12 left-0 right-0 animate-fade-in delay-400" style="opacity: 0;">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center gap-12 text-navy">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="shield-check" style="width: 16px; height: 16px; stroke-width: 1;"></i>
+                            <span style="font-size: 0.75rem; font-weight: 300; letter-spacing: 0.05em;">VERIFIED PARTNERS</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="award" style="width: 16px; height: 16px; stroke-width: 1;"></i>
+                            <span style="font-size: 0.75rem; font-weight: 300; letter-spacing: 0.05em;">BEST RATED</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="clock" style="width: 16px; height: 16px; stroke-width: 1;"></i>
+                            <span style="font-size: 0.75rem; font-weight: 300; letter-spacing: 0.05em;">24/7 SUPPORT</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Activities -->
+    <section style="padding: calc(var(--spacing) * 20) 0;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <p class="text-gold tracking-luxury mb-3" style="font-size: 0.875rem; font-weight: 300;">CURATED EXPERIENCES</p>
+                <h2 class="text-navy mb-4">Featured Activities</h2>
+                <div class="divider max-w-xs mx-auto" style="margin-top: calc(var(--spacing) * 6);"></div>
+            </div>
+
+            <!-- Activity Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1 -->
+                <div class="card-gradient-1 p-10 hover-lift cursor-pointer group">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <p class="text-navy tracking-luxury mb-2" style="font-size: 0.75rem; font-weight: 500;">WATER SPORTS</p>
+                            <h3 class="text-navy mb-2">Nusa Penida<br/>Snorkeling</h3>
+                        </div>
+                        <div class="w-12 h-12 border border-thin border-navy flex items-center justify-center group-hover:bg-navy transition-all duration-300">
+                            <i data-lucide="waves" class="text-navy group-hover:text-white transition-colors duration-300" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                        </div>
+                    </div>
+                    <p class="text-navy mb-8" style="font-size: 0.875rem; font-weight: 300; line-height: 1.8; opacity: 0.8;">
+                        Discover pristine coral reefs and vibrant marine life in crystal-clear waters. A journey beneath the surface.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">From</p>
+                            <p class="text-navy" style="font-size: 1.5rem; font-weight: 400;">Rp 850.000</p>
+                        </div>
+                        <button class="px-6 py-2 border border-thin border-navy text-navy hover:bg-navy hover:text-white transition-all duration-300" style="font-size: 0.875rem; font-weight: 300;">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card-gradient-2 p-10 hover-lift cursor-pointer group">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <p class="text-navy tracking-luxury mb-2" style="font-size: 0.75rem; font-weight: 500;">CULTURE & HERITAGE</p>
+                            <h3 class="text-navy mb-2">Sacred Temples<br/>& Traditions</h3>
+                        </div>
+                        <div class="w-12 h-12 border border-thin border-navy flex items-center justify-center group-hover:bg-navy transition-all duration-300">
+                            <i data-lucide="landmark" class="text-navy group-hover:text-white transition-colors duration-300" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                        </div>
+                    </div>
+                    <p class="text-navy mb-8" style="font-size: 0.875rem; font-weight: 300; line-height: 1.8; opacity: 0.8;">
+                        Immerse yourself in ancient Balinese spirituality and architectural wonders that have stood the test of time.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">From</p>
+                            <p class="text-navy" style="font-size: 1.5rem; font-weight: 400;">Rp 650.000</p>
+                        </div>
+                        <button class="px-6 py-2 border border-thin border-navy text-navy hover:bg-navy hover:text-white transition-all duration-300" style="font-size: 0.875rem; font-weight: 300;">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card-gradient-3 p-10 hover-lift cursor-pointer group">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <p class="text-navy tracking-luxury mb-2" style="font-size: 0.75rem; font-weight: 500;">WELLNESS & SPA</p>
+                            <h3 class="text-navy mb-2">Ubud Healing<br/>Retreat</h3>
+                        </div>
+                        <div class="w-12 h-12 border border-thin border-navy flex items-center justify-center group-hover:bg-navy transition-all duration-300">
+                            <i data-lucide="sparkles" class="text-navy group-hover:text-white transition-colors duration-300" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                        </div>
+                    </div>
+                    <p class="text-navy mb-8" style="font-size: 0.875rem; font-weight: 300; line-height: 1.8; opacity: 0.8;">
+                        Rejuvenate body and mind with traditional Balinese healing practices in the heart of Ubud's tranquil rice terraces.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">From</p>
+                            <p class="text-navy" style="font-size: 1.5rem; font-weight: 400;">Rp 1.200.000</p>
+                        </div>
+                        <button class="px-6 py-2 border border-thin border-navy text-navy hover:bg-navy hover:text-white transition-all duration-300" style="font-size: 0.875rem; font-weight: 300;">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card-gradient-4 p-10 hover-lift cursor-pointer group">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <p class="text-navy tracking-luxury mb-2" style="font-size: 0.75rem; font-weight: 500;">SUNSET EXPERIENCE</p>
+                            <h3 class="text-navy mb-2">Uluwatu Clifftop<br/>Sunset</h3>
+                        </div>
+                        <div class="w-12 h-12 border border-thin border-navy flex items-center justify-center group-hover:bg-navy transition-all duration-300">
+                            <i data-lucide="sunset" class="text-navy group-hover:text-white transition-colors duration-300" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                        </div>
+                    </div>
+                    <p class="text-navy mb-8" style="font-size: 0.875rem; font-weight: 300; line-height: 1.8; opacity: 0.8;">
+                        Witness the sun melt into the Indian Ocean from dramatic cliffs, accompanied by traditional Kecak dance performances.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">From</p>
+                            <p class="text-navy" style="font-size: 1.5rem; font-weight: 400;">Rp 450.000</p>
+                        </div>
+                        <button class="px-6 py-2 border border-thin border-navy text-navy hover:bg-navy hover:text-white transition-all duration-300" style="font-size: 0.875rem; font-weight: 300;">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="bg-teal" style="padding: calc(var(--spacing) * 20) 0;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <p class="text-gold tracking-luxury mb-3" style="font-size: 0.875rem; font-weight: 300;">EXPLORE BY TYPE</p>
+                <h2 class="text-navy mb-4">Activity Categories</h2>
+                <div class="divider max-w-xs mx-auto" style="margin-top: calc(var(--spacing) * 6);"></div>
+            </div>
+
+            <!-- Category Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Category 1 -->
+                <div class="category-card p-8 text-center cursor-pointer border border-thin border-navy">
+                    <div class="w-12 h-12 mx-auto mb-4 border border-thin border-navy flex items-center justify-center">
+                        <i data-lucide="waves" class="text-navy" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                    </div>
+                    <h4 class="text-navy mb-1" style="font-size: 1rem; font-weight: 400;">Water Sports</h4>
+                    <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">32 Activities</p>
+                </div>
+
+                <!-- Category 2 -->
+                <div class="category-card p-8 text-center cursor-pointer border border-thin border-navy">
+                    <div class="w-12 h-12 mx-auto mb-4 border border-thin border-navy flex items-center justify-center">
+                        <i data-lucide="mountain" class="text-navy" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                    </div>
+                    <h4 class="text-navy mb-1" style="font-size: 1rem; font-weight: 400;">Adventure</h4>
+                    <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">28 Activities</p>
+                </div>
+
+                <!-- Category 3 -->
+                <div class="category-card p-8 text-center cursor-pointer border border-thin border-navy">
+                    <div class="w-12 h-12 mx-auto mb-4 border border-thin border-navy flex items-center justify-center">
+                        <i data-lucide="landmark" class="text-navy" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                    </div>
+                    <h4 class="text-navy mb-1" style="font-size: 1rem; font-weight: 400;">Culture</h4>
+                    <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">24 Activities</p>
+                </div>
+
+                <!-- Category 4 -->
+                <div class="category-card p-8 text-center cursor-pointer border border-thin border-navy">
+                    <div class="w-12 h-12 mx-auto mb-4 border border-thin border-navy flex items-center justify-center">
+                        <i data-lucide="utensils" class="text-navy" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                    </div>
+                    <h4 class="text-navy mb-1" style="font-size: 1rem; font-weight: 400;">Culinary</h4>
+                    <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">18 Activities</p>
+                </div>
+
+                <!-- Category 5 -->
+                <div class="category-card p-8 text-center cursor-pointer border border-thin border-navy">
+                    <div class="w-12 h-12 mx-auto mb-4 border border-thin border-navy flex items-center justify-center">
+                        <i data-lucide="sparkles" class="text-navy" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                    </div>
+                    <h4 class="text-navy mb-1" style="font-size: 1rem; font-weight: 400;">Wellness</h4>
+                    <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">22 Activities</p>
+                </div>
+
+                <!-- Category 6 -->
+                <div class="category-card p-8 text-center cursor-pointer border border-thin border-navy">
+                    <div class="w-12 h-12 mx-auto mb-4 border border-thin border-navy flex items-center justify-center">
+                        <i data-lucide="map" class="text-navy" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                    </div>
+                    <h4 class="text-navy mb-1" style="font-size: 1rem; font-weight: 400;">Tours</h4>
+                    <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">35 Activities</p>
+                </div>
+
+                <!-- Category 7 -->
+                <div class="category-card p-8 text-center cursor-pointer border border-thin border-navy">
+                    <div class="w-12 h-12 mx-auto mb-4 border border-thin border-navy flex items-center justify-center">
+                        <i data-lucide="ship" class="text-navy" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                    </div>
+                    <h4 class="text-navy mb-1" style="font-size: 1rem; font-weight: 400;">Island Hopping</h4>
+                    <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">16 Activities</p>
+                </div>
+
+                <!-- Category 8 -->
+                <div class="category-card p-8 text-center cursor-pointer border border-thin border-navy">
+                    <div class="w-12 h-12 mx-auto mb-4 border border-thin border-navy flex items-center justify-center">
+                        <i data-lucide="sunset" class="text-navy" style="width: 20px; height: 20px; stroke-width: 1;"></i>
+                    </div>
+                    <h4 class="text-navy mb-1" style="font-size: 1rem; font-weight: 400;">Sunset</h4>
+                    <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">14 Activities</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="bg-navy" style="padding: calc(var(--spacing) * 20) 0;">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gold tracking-luxury mb-4" style="font-size: 0.875rem; font-weight: 300;">BEGIN YOUR JOURNEY</p>
+            <h2 class="text-white mb-6">Ready to Explore?</h2>
+            <p class="text-white mb-12" style="font-size: 1.125rem; font-weight: 300; line-height: 1.8; opacity: 0.8; max-width: 600px; margin: 0 auto 3rem;">
+                Discover handcrafted experiences that reveal the soul of Bali. Your adventure awaits.
+            </p>
+            <button class="px-12 py-4 bg-gold text-white hover:bg-gold-light transition-all duration-300" style="font-size: 0.875rem; font-weight: 300; letter-spacing: 0.05em;">
+                START EXPLORING
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-thin border-navy" style="padding: calc(var(--spacing) * 15) 0 calc(var(--spacing) * 8) 0;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div style="width: calc(var(--spacing) * 3); height: calc(var(--spacing) * 3);" class="bg-navy"></div>
+                        <span class="text-navy font-medium tracking-luxury" style="font-size: 0.875rem;">BALIOKAY</span>
+                    </div>
+                    <p class="text-navy" style="font-size: 0.875rem; font-weight: 300; line-height: 1.8; opacity: 0.6;">
+                        Curated travel experiences in Bali's most enchanting destinations.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h5 class="text-navy mb-4 tracking-luxury" style="font-size: 0.75rem; font-weight: 500;">EXPLORE</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">All Activities</a></li>
+                        <li><a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">Destinations</a></li>
+                        <li><a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">Special Offers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h5 class="text-navy mb-4 tracking-luxury" style="font-size: 0.75rem; font-weight: 500;">SUPPORT</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">Help Center</a></li>
+                        <li><a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">Contact Us</a></li>
+                        <li><a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.875rem; font-weight: 300;">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Connect -->
+                <div>
+                    <h5 class="text-navy mb-4 tracking-luxury" style="font-size: 0.75rem; font-weight: 500;">CONNECT</h5>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 border border-thin border-navy flex items-center justify-center hover:bg-navy hover:text-white transition-all duration-300">
+                            <i data-lucide="instagram" class="text-navy hover:text-white" style="width: 16px; height: 16px; stroke-width: 1;"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 border border-thin border-navy flex items-center justify-center hover:bg-navy hover:text-white transition-all duration-300">
+                            <i data-lucide="facebook" class="text-navy hover:text-white" style="width: 16px; height: 16px; stroke-width: 1;"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 border border-thin border-navy flex items-center justify-center hover:bg-navy hover:text-white transition-all duration-300">
+                            <i data-lucide="twitter" class="text-navy hover:text-white" style="width: 16px; height: 16px; stroke-width: 1;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider mb-8"></div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-navy" style="font-size: 0.75rem; font-weight: 300; opacity: 0.6;">
+                    © 2025 BaliOkayTravel. All rights reserved.
+                </p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.75rem; font-weight: 300;">Privacy Policy</a>
+                    <a href="#" class="text-navy hover:text-gold transition-colors duration-300" style="font-size: 0.75rem; font-weight: 300;">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons({
+            attrs: {
+                'stroke-width': 1
+            }
+        });
+
+        // Sticky nav scroll effect
+        const nav = document.querySelector('.sticky-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Fade in navigation on load
+        setTimeout(() => {
+            nav.style.opacity = '1';
+        }, 500);
+    </script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaliOkayTravel - Activity Card Component</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./bali_tropical_luxury_theme.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Figtree', sans-serif !important;
+            background-color: var(--sand) !important;
+            color: var(--foreground) !important;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif !important;
+            font-weight: 700 !important;
+        }
+
+        /* Glassmorphism Effects */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Card Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        /* Button Effects */
+        .btn-primary {
+            background: var(--ocean-blue);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--ocean-blue-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Heart Icon Animation */
+        .heart-icon {
+            transition: all 0.3s ease;
+        }
+
+        .heart-icon:hover {
+            transform: scale(1.2);
+            fill: var(--coral);
+            stroke: var(--coral);
+        }
+
+        /* Price Badge */
+        .price-badge {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .ripple:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Skeleton Loading */
+        .skeleton {
+            background: linear-gradient(90deg, var(--sand) 25%, var(--sand-light) 50%, var(--sand) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Category Badge Colors */
+        .badge-water {
+            background: var(--ocean-blue);
+        }
+
+        .badge-adventure {
+            background: var(--jungle-green);
+        }
+
+        .badge-culture {
+            background: var(--sunset-gold);
+        }
+
+        .badge-culinary {
+            background: var(--coral);
+        }
+
+        .badge-wellness {
+            background: var(--ocean-blue);
+        }
+
+        .badge-tours {
+            background: var(--jungle-green);
+        }
+
+        .badge-island {
+            background: var(--sunset-gold);
+        }
+
+        .badge-sunset {
+            background: var(--coral);
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl sm:text-5xl font-bold text-foreground mb-4 animate-fade-in-up">
+                    Activity Card Component
+                </h1>
+                <p class="text-xl text-foreground opacity-80 max-w-2xl mx-auto animate-fade-in-up">
+                    Premium activity cards with glassmorphism effects and micro-interactions
+                </p>
+            </div>
+
+            <!-- Activity Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Card 1: Surfing -->
+                <div class="glass-card rounded-3xl overflow-hidden group animate-scale-in">
+                    <!-- Image Container -->
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Surfing Lesson" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Heart Icon -->
+                        <button class="absolute top-4 right-4 w-10 h-10 glass-strong rounded-full flex items-center justify-center heart-icon">
+                            <i data-lucide="heart" class="w-5 h-5 text-foreground"></i>
+                        </button>
+                        
+                        <!-- Price Badge -->
+                        <div class="price-badge absolute bottom-4 left-4 px-4 py-2 rounded-full">
+                            <p class="text-foreground font-bold">$45 USD</p>
+                            <p class="text-foreground text-xs opacity-70">Rp 675,000</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Card Content -->
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="badge-water text-white px-3 py-1 rounded-full text-xs font-medium">Water Sports</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 text-sunset-gold fill-sunset-gold"></i>
+                                <span class="text-foreground font-semibold">4.8</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Surfing Lesson</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Experience the thrill of riding Bali's famous waves with expert instructors</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Canggu</span>
+                        </div>
+                        <button class="w-full btn-primary py-3 rounded-xl text-white font-semibold ripple">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Temple Tour -->
+                <div class="glass-card rounded-3xl overflow-hidden group animate-scale-in" style="animation-delay: 0.1s;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Sacred Temple Tour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button class="absolute top-4 right-4 w-10 h-10 glass-strong rounded-full flex items-center justify-center heart-icon">
+                            <i data-lucide="heart" class="w-5 h-5 text-foreground"></i>
+                        </button>
+                        <div class="price-badge absolute bottom-4 left-4 px-4 py-2 rounded-full">
+                            <p class="text-foreground font-bold">$65 USD</p>
+                            <p class="text-foreground text-xs opacity-70">Rp 975,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="badge-culture text-white px-3 py-1 rounded-full text-xs font-medium">Culture</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 text-sunset-gold fill-sunset-gold"></i>
+                                <span class="text-foreground font-semibold">4.9</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Sacred Temple Tour</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Discover ancient Balinese spirituality and stunning temple architecture</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Ubud</span>
+                        </div>
+                        <button class="w-full btn-primary py-3 rounded-xl text-white font-semibold ripple">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Snorkeling -->
+                <div class="glass-card rounded-3xl overflow-hidden group animate-scale-in" style="animation-delay: 0.2s;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Nusa Penida Snorkeling" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button class="absolute top-4 right-4 w-10 h-10 glass-strong rounded-full flex items-center justify-center heart-icon">
+                            <i data-lucide="heart" class="w-5 h-5 text-foreground"></i>
+                        </button>
+                        <div class="price-badge absolute bottom-4 left-4 px-4 py-2 rounded-full">
+                            <p class="text-foreground font-bold">$55 USD</p>
+                            <p class="text-foreground text-xs opacity-70">Rp 825,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="badge-island text-white px-3 py-1 rounded-full text-xs font-medium">Island Hopping</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 text-sunset-gold fill-sunset-gold"></i>
+                                <span class="text-foreground font-semibold">5.0</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Nusa Penida Snorkeling</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Swim with manta rays and explore vibrant coral reefs</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Nusa Penida</span>
+                        </div>
+                        <button class="w-full btn-primary py-3 rounded-xl text-white font-semibold ripple">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Sunset Dinner -->
+                <div class="glass-card rounded-3xl overflow-hidden group animate-scale-in" style="animation-delay: 0.3s;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Jimbaran Beach Dinner" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button class="absolute top-4 right-4 w-10 h-10 glass-strong rounded-full flex items-center justify-center heart-icon">
+                            <i data-lucide="heart" class="w-5 h-5 text-foreground"></i>
+                        </button>
+                        <div class="price-badge absolute bottom-4 left-4 px-4 py-2 rounded-full">
+                            <p class="text-foreground font-bold">$85 USD</p>
+                            <p class="text-foreground text-xs opacity-70">Rp 1,275,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="badge-sunset text-white px-3 py-1 rounded-full text-xs font-medium">Sunset Experience</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 text-sunset-gold fill-sunset-gold"></i>
+                                <span class="text-foreground font-semibold">4.9</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Jimbaran Beach Dinner</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Romantic seafood dinner on the beach with stunning sunset views</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Jimbaran</span>
+                        </div>
+                        <button class="w-full btn-primary py-3 rounded-xl text-white font-semibold ripple">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 5: Yoga Class -->
+                <div class="glass-card rounded-3xl overflow-hidden group animate-scale-in" style="animation-delay: 0.4s;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Yoga Class" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button class="absolute top-4 right-4 w-10 h-10 glass-strong rounded-full flex items-center justify-center heart-icon">
+                            <i data-lucide="heart" class="w-5 h-5 text-foreground"></i>
+                        </button>
+                        <div class="price-badge absolute bottom-4 left-4 px-4 py-2 rounded-full">
+                            <p class="text-foreground font-bold">$35 USD</p>
+                            <p class="text-foreground text-xs opacity-70">Rp 525,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="badge-wellness text-white px-3 py-1 rounded-full text-xs font-medium">Wellness</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 text-sunset-gold fill-sunset-gold"></i>
+                                <span class="text-foreground font-semibold">4.7</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Morning Yoga Class</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Start your day with peaceful yoga in a serene jungle setting</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Ubud</span>
+                        </div>
+                        <button class="w-full btn-primary py-3 rounded-xl text-white font-semibold ripple">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 6: Cooking Class -->
+                <div class="glass-card rounded-3xl overflow-hidden group animate-scale-in" style="animation-delay: 0.5s;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Balinese Cooking Class" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button class="absolute top-4 right-4 w-10 h-10 glass-strong rounded-full flex items-center justify-center heart-icon">
+                            <i data-lucide="heart" class="w-5 h-5 text-foreground"></i>
+                        </button>
+                        <div class="price-badge absolute bottom-4 left-4 px-4 py-2 rounded-full">
+                            <p class="text-foreground font-bold">$40 USD</p>
+                            <p class="text-foreground text-xs opacity-70">Rp 600,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="badge-culinary text-white px-3 py-1 rounded-full text-xs font-medium">Culinary</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 text-sunset-gold fill-sunset-gold"></i>
+                                <span class="text-foreground font-semibold">4.8</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Balinese Cooking Class</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Learn to prepare authentic Balinese dishes with local chefs</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Sanur</span>
+                        </div>
+                        <button class="w-full btn-primary py-3 rounded-xl text-white font-semibold ripple">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 7: Hiking Tour -->
+                <div class="glass-card rounded-3xl overflow-hidden group animate-scale-in" style="animation-delay: 0.6s;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Mount Batur Sunrise Hike" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button class="absolute top-4 right-4 w-10 h-10 glass-strong rounded-full flex items-center justify-center heart-icon">
+                            <i data-lucide="heart" class="w-5 h-5 text-foreground"></i>
+                        </button>
+                        <div class="price-badge absolute bottom-4 left-4 px-4 py-2 rounded-full">
+                            <p class="text-foreground font-bold">$50 USD</p>
+                            <p class="text-foreground text-xs opacity-70">Rp 750,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="badge-adventure text-white px-3 py-1 rounded-full text-xs font-medium">Adventure</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 text-sunset-gold fill-sunset-gold"></i>
+                                <span class="text-foreground font-semibold">4.9</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Mount Batur Sunrise Hike</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Trek to the summit for breathtaking sunrise views</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Kintamani</span>
+                        </div>
+                        <button class="w-full btn-primary py-3 rounded-xl text-white font-semibold ripple">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 8: Cycling Tour -->
+                <div class="glass-card rounded-3xl overflow-hidden group animate-scale-in" style="animation-delay: 0.7s;">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Bali Cycling Tour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <button class="absolute top-4 right-4 w-10 h-10 glass-strong rounded-full flex items-center justify-center heart-icon">
+                            <i data-lucide="heart" class="w-5 h-5 text-foreground"></i>
+                        </button>
+                        <div class="price-badge absolute bottom-4 left-4 px-4 py-2 rounded-full">
+                            <p class="text-foreground font-bold">$38 USD</p>
+                            <p class="text-foreground text-xs opacity-70">Rp 570,000</p>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="badge-tours text-white px-3 py-1 rounded-full text-xs font-medium">Tours</span>
+                            <div class="flex items-center space-x-1">
+                                <i data-lucide="star" class="w-4 h-4 text-sunset-gold fill-sunset-gold"></i>
+                                <span class="text-foreground font-semibold">4.7</span>
+                            </div>
+                        </div>
+                        <h3 class="text-foreground font-bold text-xl mb-2">Bali Cycling Tour</h3>
+                        <p class="text-foreground opacity-70 text-sm mb-4">Explore rice terraces and traditional villages by bike</p>
+                        <div class="flex items-center text-foreground opacity-60 text-sm mb-4">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Ubud</span>
+                        </div>
+                        <button class="w-full btn-primary py-3 rounded-xl text-white font-semibold ripple">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skeleton Loading State Example -->
+            <div class="mt-16">
+                <h2 class="text-3xl font-bold text-foreground mb-8">Loading State Example</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Skeleton Card -->
+                    <div class="glass-card rounded-3xl overflow-hidden">
+                        <div class="skeleton h-64"></div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="skeleton h-6 w-20 rounded-full"></div>
+                                <div class="flex items-center space-x-1">
+                                    <div class="skeleton h-4 w-4 rounded-full"></div>
+                                    <div class="skeleton h-4 w-8 rounded"></div>
+                                </div>
+                            </div>
+                            <div class="skeleton h-6 w-full rounded mb-2"></div>
+                            <div class="skeleton h-4 w-full rounded mb-1"></div>
+                            <div class="skeleton h-4 w-3/4 rounded mb-4"></div>
+                            <div class="flex items-center mb-4">
+                                <div class="skeleton h-4 w-4 rounded-full mr-2"></div>
+                                <div class="skeleton h-4 w-20 rounded"></div>
+                            </div>
+                            <div class="skeleton h-12 w-full rounded-xl"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
